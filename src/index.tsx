@@ -5,9 +5,10 @@ import './css/index.scss';
 export interface Props {
   children: ReactNode;
   isLoading: boolean;
+  backgroundColor?: string;
 }
 
-const Pulsable = ({ children, isLoading }: Props) => {
+const Pulsable = ({ children, isLoading, backgroundColor }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isCalculating, setCalculating] = useState(true);
   useEffect(() => {
@@ -32,6 +33,7 @@ const Pulsable = ({ children, isLoading }: Props) => {
         const pc = element.querySelector('.pulse-child');
         if (!pc) {
           const pulseEl = document.createElement('div');
+          pulseEl.style.backgroundColor = backgroundColor || '#bebebe82';
           pulseEl.classList.add('pulse-child', 'animate-pulse');
           element.appendChild(pulseEl);
         }
