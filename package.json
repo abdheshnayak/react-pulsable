@@ -1,0 +1,88 @@
+{
+  "name": "react-pulsable",
+  "author": "Abdhesh Nayak",
+  "license": "MIT",
+  "version": "0.0.4",
+  "description": "This is a simple react component that can be used to wrap other components and add a pulsing/skeleton effect to them.",
+  "private": false,
+  "types": "./dist/@types/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "sideEffects": false,
+  "exports": {
+    "./index.css": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
+    },
+    ".": {
+      "import": {
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdheshnayak/react-pulsable.git"
+  },
+  "keywords": [
+    "react",
+    "pulsable",
+    "skeleton",
+    "pulse",
+    "pulse-effect",
+    "pulse-component",
+    "pulse-skeleton",
+    "skeleton-component",
+    "skeleton-effect",
+    "skeleton-loader",
+    "skeleton-pulse"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run build:css && node build.js && npm run tsc",
+    "pack": "npm pack --pack-destination ./out",
+    "clean": "rimraf dist",
+    "dev:build": "npm run build",
+    "tsc": "tsc --emitDeclarationOnly --outDir ./dist/@types",
+    "build:css": "tailwindcss -i ./src/scss/build.scss -o ./src/css/index.scss"
+  },
+  "dependencies": {
+    "classnames": "^2.3.2"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^17.0.0 || ^16.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "esbuild": "^0.19.2",
+    "esbuild-sass-plugin": "^2.16.0",
+    "eslint": "^8.47.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-jsconfig": "^1.1.0",
+    "eslint-import-resolver-node": "^0.3.6",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prefer-arrow-functions": "^3.1.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.1",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.2.2"
+  }
+}
