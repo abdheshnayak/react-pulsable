@@ -34,6 +34,21 @@ const Pulsable = ({ children, isLoading, backgroundColor }: Props) => {
         if (!pc) {
           const pulseEl = document.createElement('div');
           pulseEl.style.backgroundColor = backgroundColor || '#bebebe82';
+          if (element.classList.contains('pulsable-circle')) {
+            pulseEl.classList.add(
+              'pulse-child',
+              'animate-pulse',
+              'pulse-child-circle'
+            );
+          } else {
+            pulseEl.classList.add(
+              'pulse-child',
+              'animate-pulse',
+              'pulse-child-rect'
+            );
+          }
+
+          element.parentNode?.appendChild(pulseEl);
           pulseEl.classList.add('pulse-child', 'animate-pulse');
           element.appendChild(pulseEl);
         }
