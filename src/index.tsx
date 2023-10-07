@@ -37,19 +37,18 @@ const Pulsable = ({ children, isLoading, backgroundColor }: Props) => {
           if (element.classList.contains('pulsable-circle')) {
             pulseEl.classList.add(
               'pulse-child',
-              'animate-pulse',
+              'pulse-animate',
               'pulse-child-circle'
             );
           } else {
             pulseEl.classList.add(
               'pulse-child',
-              'animate-pulse',
+              'pulse-animate',
               'pulse-child-rect'
             );
           }
 
           element.parentNode?.appendChild(pulseEl);
-          pulseEl.classList.add('pulse-child', 'animate-pulse');
           element.appendChild(pulseEl);
         }
       });
@@ -73,9 +72,7 @@ const Pulsable = ({ children, isLoading, backgroundColor }: Props) => {
       });
 
       const docs = ref.current.querySelectorAll('.pulse-child-element');
-      console.log(docs, 'docs');
       docs.forEach((element) => {
-        console.log(element.classList, 'here');
         element.classList.remove('pulse-child-element');
 
         if (element.classList.contains('pulse-has-disabled-attr')) {
@@ -91,9 +88,9 @@ const Pulsable = ({ children, isLoading, backgroundColor }: Props) => {
   return (
     <div
       ref={ref}
-      className={cn('pulse-container transition-all', {
-        'opacity-0 pulse-container-css': isLoading && isCalculating,
-        'flex flex-col pulse-container-css': isLoading,
+      className={cn('pulse-container', {
+        'pulse-calculating pulse-container-css': isLoading && isCalculating,
+        'pulse-container-css': isLoading,
       })}
     >
       {children}

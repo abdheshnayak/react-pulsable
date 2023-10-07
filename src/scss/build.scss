@@ -1,7 +1,14 @@
 .pulse-container {
   &.pulse-container-css{
-
     @tailwind utilities;
+
+    &.pulse-calculating{
+      opacity: 0 !important;
+    }
+
+    .pulse-animate{
+      @apply animate-pulse;
+     }
 
     .pulse-element{
       color: transparent !important;

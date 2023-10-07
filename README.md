@@ -2,7 +2,9 @@
 
 This is a simple react component that can be used to wrap other components and add a pulsing/skeleton effect to them.
 
-[demo](https://k7fdzw.csb.app/)
+[Demo Link](https://k7fdzw.csb.app/)
+
+![Demo Image](./screenshot.gif)
 
 ## Example 1
 
