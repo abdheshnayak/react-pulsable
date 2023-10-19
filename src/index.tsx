@@ -47,6 +47,12 @@ const Pulsable = ({ children, isLoading, backgroundColor }: Props) => {
               'pulse-animate',
               'pulse-child-circle'
             );
+          } else if (element.classList.contains('pulsable-hidden')) {
+            pulseEl.classList.add(
+              'pulse-child',
+              'pulse-animate',
+              'pulse-child-hidden'
+            );
           } else {
             pulseEl.classList.add(
               'pulse-child',
