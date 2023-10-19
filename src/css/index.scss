@@ -1,5 +1,11 @@
 .pulse-container {
   &.pulse-container-css{
+    -webkit-user-select: none;
+    /* Safari */
+    /* IE 10 and IE 11 */
+    -moz-user-select: none;
+         user-select: none;
+    /* Standard syntax */
     &.pulse-calculating{
       opacity: 0 !important;
     }
