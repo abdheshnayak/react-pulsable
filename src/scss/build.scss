@@ -4,9 +4,13 @@
 
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
+
+    pointer-events: none !important;
+
     user-select: none; /* Standard syntax */
 
     &.pulse-calculating{
+      outline: none !important;
       opacity: 0 !important;
     }
 
@@ -15,6 +19,7 @@
      }
 
     .pulse-element{
+      outline: none !important;
       color: transparent !important;
       border: 0 !important;
       position: relative !important;
@@ -22,6 +27,7 @@
     }
 
     .pulse-child-element{
+      outline: none !important;
       opacity: 0 !important;
     }
 

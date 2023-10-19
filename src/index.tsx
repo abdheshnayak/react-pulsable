@@ -17,9 +17,15 @@ const Pulsable = ({ children, isLoading, backgroundColor }: Props) => {
       if (!ref.current) {
         return;
       }
-      const docs = ref.current.querySelectorAll('.pulsable');
-      docs.forEach((element) => {
+
+      ref.current.querySelectorAll('.pulsable').forEach((element) => {
         element.classList.add('pulse-element');
+
+        if (!element.hasAttribute('disabled')) {
+          element.classList.add('pulse-has-disabled-attr');
+          element.setAttribute('disabled', 'true');
+        }
+
         element.childNodes.forEach((ch: any) => {
           if (ch.classList && !ch.classList.contains('pulse-child')) {
             ch.classList.add('pulse-child-element');
@@ -30,6 +36,7 @@ const Pulsable = ({ children, isLoading, backgroundColor }: Props) => {
             }
           }
         });
+
         const pc = element.querySelector('.pulse-child');
         if (!pc) {
           const pulseEl = document.createElement('div');
@@ -58,28 +65,29 @@ const Pulsable = ({ children, isLoading, backgroundColor }: Props) => {
       if (!ref.current) {
         return;
       }
-      const pc = ref.current.querySelectorAll('.pulse-child');
 
-      pc.forEach((v) => {
+      ref.current.querySelectorAll('.pulse-child').forEach((v) => {
         v.parentNode?.removeChild(v);
       });
 
-      const pc2 = ref.current.querySelectorAll('.pulse-element');
-      pc2.forEach((v) => {
+      ref.current.querySelectorAll('.pulse-element').forEach((v) => {
         if (v.classList) {
           v.classList.remove('pulse-element');
         }
       });
 
-      const docs = ref.current.querySelectorAll('.pulse-child-element');
-      docs.forEach((element) => {
-        element.classList.remove('pulse-child-element');
-
-        if (element.classList.contains('pulse-has-disabled-attr')) {
+      ref.current
+        .querySelectorAll('.pulse-has-disabled-attr')
+        .forEach((element) => {
           element.removeAttribute('disabled');
           element.classList.remove('pulse-has-disabled-attr');
-        }
-      });
+        });
+
+      ref.current
+        .querySelectorAll('.pulse-child-element')
+        .forEach((element) => {
+          element.classList.remove('pulse-child-element');
+        });
 
       setCalculating(false);
     }
