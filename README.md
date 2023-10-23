@@ -98,6 +98,8 @@ export default App;
 The component takes two props:
 - `isLoading`: a boolean that indicates whether the component should be pulsing or not.
 - `backgroundColor`: a string that indicates the background color of the pulsing effect. It can be any valid css color value.
+- `noRadius`: a boolean that indicates whether the pulsing effect should have rounded corners or not. By default it has rounded corners.
+
 
 ### Conditions:
 
@@ -105,6 +107,7 @@ The component takes two props:
 - You must provide isLoading state to the `Pulsable` component.
 - You can use the `className="pulsable"` to add the pulsing effect to any element.
 - if your component is a self closing tag like `<img />` you should have to wrap it with div and add pulsable class to that. 
+- if you want to hide some components while loading add class name "pulsable-hidden"
 
 #### Example 2
 

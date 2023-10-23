@@ -54,8 +54,17 @@
       border-radius: 100% !important;
     }
 
-    .pulsable-child-hidden{
+    .pulse-child-hidden{
       opacity: 0 !important;
+    }
+
+    .pulse-child-rect-sharp{
+      position: absolute !important;
+      z-index: 1 !important;
+      width: 100% !important;
+      height: 70% !important;
+      top: 15% !important;
+      left: 0 !important;
     }
   }
 }

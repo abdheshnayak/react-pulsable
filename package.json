@@ -2,7 +2,7 @@
   "name": "react-pulsable",
   "author": "Abdhesh Nayak",
   "license": "MIT",
-  "version": "0.0.87",
+  "version": "0.0.88",
   "description": "This is a simple react component that can be used to wrap other components and add a pulsing/skeleton effect to them.",
   "private": false,
   "types": "./dist/@types/index.d.ts",
@@ -49,6 +49,7 @@
     "access": "public"
   },
   "scripts": {
+    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
     "build": "npm run clean && npm run build:css && node build.js && npm run tsc",
     "pack": "npm pack --pack-destination ./out",
     "clean": "rimraf dist",
@@ -63,7 +64,8 @@
     "react": "^18.2.0 || ^17.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.22",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.14",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
     "esbuild": "^0.19.2",
@@ -81,8 +83,22 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.8.8",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
     "rimraf": "^5.0.1",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.2.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

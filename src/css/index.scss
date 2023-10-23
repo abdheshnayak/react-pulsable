@@ -5,12 +5,16 @@
     -ms-user-select: none;
     /* IE 10 and IE 11 */
     pointer-events: none !important;
-    -moz-user-select: none;
-         user-select: none;
+    user-select: none;
     /* Standard syntax */
     &.pulse-calculating{
       outline: none !important;
       opacity: 0 !important;
+    }
+    @-webkit-keyframes pulse {
+      50% {
+        opacity: .5;
+      }
     }
     @keyframes pulse {
       50% {
@@ -18,7 +22,8 @@
       }
     }
     .pulse-animate {
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      -webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+              animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
     .pulse-element{
       outline: none !important;
@@ -51,8 +56,16 @@
       left: 5% !important;
       border-radius: 100% !important;
     }
-    .pulsable-child-hidden{
+    .pulse-child-hidden{
       opacity: 0 !important;
+    }
+    .pulse-child-rect-sharp{
+      position: absolute !important;
+      z-index: 1 !important;
+      width: 100% !important;
+      height: 70% !important;
+      top: 15% !important;
+      left: 0 !important;
     }
   }
 }
