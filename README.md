@@ -108,6 +108,7 @@ The component takes two props:
 - You can use the `className="pulsable"` to add the pulsing effect to any element.
 - if your component is a self closing tag like `<img />` you should have to wrap it with div and add pulsable class to that. 
 - if you want to hide some components while loading add class name "pulsable-hidden"
+- if you want to add image icon in skeleton add class name "pulsable-img"
 
 #### Example 2
 

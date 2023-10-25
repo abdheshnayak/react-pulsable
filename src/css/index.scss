@@ -1,5 +1,9 @@
 .pulse-container {
   &.pulse-container-css{
+    .transform {
+      -webkit-transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+              transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    }
     -webkit-user-select: none;
     /* Safari */
     -ms-user-select: none;
@@ -25,6 +29,21 @@
       -webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
               animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
+    .pulse-svg-cont{
+      position: absolute !important;
+      z-index: 1 !important;
+      width: 100% !important;
+      height: 100% !important;
+      top: 0 !important;
+      left: 0 !important;
+      svg{
+        position: absolute !important;
+        -webkit-transform: translate(-50%, -50%) !important;
+                transform: translate(-50%, -50%) !important;
+        left: 50% !important;
+        top: 50% !important;
+      }
+    }
     .pulse-element{
       outline: none !important;
       color: transparent !important;
@@ -35,8 +54,6 @@
     .pulse-child-element{
       outline: none !important;
       opacity: 0 !important;
-    }
-    .pulse-child{
     }
     .pulse-child-rect{
       position: absolute !important;

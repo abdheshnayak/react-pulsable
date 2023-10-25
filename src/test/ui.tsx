@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
 import Pulsable from '../pulsable';
 import '../css/index.scss';
@@ -79,7 +80,7 @@ const FormComp = () => {
 const ProfileCard = () => {
   return (
     <div className="profile-card">
-      <div className="profile-picture pulsable pulsable-circle">
+      <div className="profile-picture pulsable pulsable-circle pulsable-img">
         <img src="https://picsum.photos/200" alt="profile" />
       </div>
       <div className="details-container">

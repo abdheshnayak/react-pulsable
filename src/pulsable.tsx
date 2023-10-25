@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import './css/index.scss';
+import { iPlaceholder } from './image-placeholder';
 
 export interface Props {
   children: ReactNode;
@@ -23,6 +24,10 @@ const Pulsable = ({
       if (!ref.current) {
         return;
       }
+
+      const iSvg = document.createElement('div');
+      iSvg.classList.add('pulse-svg-cont');
+      iSvg.innerHTML = iPlaceholder;
 
       ref.current.querySelectorAll('.pulsable').forEach((element) => {
         element.classList.add('pulse-element');
@@ -72,6 +77,10 @@ const Pulsable = ({
               'pulse-animate',
               'pulse-child-rect'
             );
+          }
+
+          if (element.classList.contains('pulsable-img')) {
+            pulseEl.appendChild(iSvg);
           }
 
           element.parentNode?.appendChild(pulseEl);
