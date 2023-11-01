@@ -2,7 +2,7 @@
   "name": "react-pulsable",
   "author": "Abdhesh Nayak",
   "license": "MIT",
-  "version": "0.0.91",
+  "version": "0.0.92",
   "description": "This is a simple react component that can be used to wrap other components and add a pulsing/skeleton effect to them.",
   "private": false,
   "types": "./dist/@types/pulsable.d.ts",

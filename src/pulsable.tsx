@@ -8,6 +8,7 @@ export interface Props {
   isLoading: boolean;
   backgroundColor?: string;
   noRadius?: boolean;
+  noPadding?: boolean;
 }
 
 const Pulsable = ({
@@ -15,6 +16,7 @@ const Pulsable = ({
   isLoading,
   backgroundColor,
   noRadius = false,
+  noPadding = false,
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isCalculating, setCalculating] = useState(true);
@@ -70,6 +72,12 @@ const Pulsable = ({
               'pulse-child',
               'pulse-animate',
               'pulse-child-rect-sharp'
+            );
+          } else if (noPadding) {
+            pulseEl.classList.add(
+              'pulse-child',
+              'pulse-animate',
+              'pulse-child-rect-full'
             );
           } else {
             pulseEl.classList.add(
