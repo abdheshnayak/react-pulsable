@@ -64,6 +64,23 @@
       left: 0 !important;
       border-radius: 5px !important;
     }
+    .pulse-child-para-cont{
+      background-color: transparent !important;
+      position: absolute !important;
+      z-index: 1 !important;
+      width: 100% !important;
+      top: 0% !important;
+      left: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .pulse-child-para{
+      position: relative !important;
+      z-index: 1 !important;
+      border-radius: 5px !important;
+      width: 100% !important;
+      flex: 1 !important;
+    }
     .pulse-child-rect-full{
       position: absolute !important;
       z-index: 1 !important;

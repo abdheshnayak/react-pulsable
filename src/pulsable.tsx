@@ -11,6 +11,30 @@ export interface Props {
   noPadding?: boolean;
 }
 
+function countLines(target: Element) {
+  var style = window.getComputedStyle(target, null);
+  var height = parseInt(style.getPropertyValue('height'), 10);
+  var font_size = parseInt(style.getPropertyValue('font-size'), 10);
+  var line_height = parseInt(style.getPropertyValue('line-height'), 10);
+  var box_sizing = style.getPropertyValue('box-sizing');
+
+  if (Number.isNaN(line_height)) line_height = font_size * 1.2;
+
+  if (box_sizing === 'border-box') {
+    var padding_top = parseInt(style.getPropertyValue('padding-top'), 10);
+    var padding_bottom = parseInt(style.getPropertyValue('padding-bottom'), 10);
+    var border_top = parseInt(style.getPropertyValue('border-top-width'), 10);
+    var border_bottom = parseInt(
+      style.getPropertyValue('border-bottom-width'),
+      10
+    );
+    height = height - padding_top - padding_bottom - border_top - border_bottom;
+  }
+
+  var lines = Math.ceil(height / line_height);
+  return { lines, font_size, height };
+}
+
 const Pulsable = ({
   children,
   isLoading,
@@ -22,111 +46,131 @@ const Pulsable = ({
   const [isCalculating, setCalculating] = useState(true);
   useEffect(() => {
     setCalculating(true);
-    if (isLoading) {
-      if (!ref.current) {
-        return;
-      }
-
-      const iSvg = document.createElement('div');
-      iSvg.classList.add('pulse-svg-cont');
-      iSvg.innerHTML = iPlaceholder;
-
-      ref.current.querySelectorAll('.pulsable').forEach((element) => {
-        element.classList.add('pulse-element');
-
-        if (!element.hasAttribute('disabled')) {
-          element.classList.add('pulse-has-disabled-attr');
-          element.setAttribute('disabled', 'true');
+    (async () => {
+      if (isLoading) {
+        if (!ref.current) {
+          return;
         }
 
-        element.childNodes.forEach((ch: any) => {
-          if (ch.classList && !ch.classList.contains('pulse-child')) {
-            ch.classList.add('pulse-child-element');
+        const iSvg = document.createElement('div');
+        iSvg.classList.add('pulse-svg-cont');
+        iSvg.innerHTML = iPlaceholder;
 
-            if (!ch?.hasAttribute('disabled')) {
-              ch.classList.add('pulse-has-disabled-attr');
-              ch.setAttribute('disabled', 'true');
+        ref.current.querySelectorAll('.pulsable').forEach(async (element) => {
+          element.classList.add('pulse-element');
+
+          if (!element.hasAttribute('disabled')) {
+            element.classList.add('pulse-has-disabled-attr');
+            element.setAttribute('disabled', 'true');
+          }
+
+          element.childNodes.forEach(async (ch: any) => {
+            if (ch.classList && !ch.classList.contains('pulse-child')) {
+              ch.classList.add('pulse-child-element');
+
+              if (!ch?.hasAttribute('disabled')) {
+                ch.classList.add('pulse-has-disabled-attr');
+                ch.setAttribute('disabled', 'true');
+              }
             }
+          });
+
+          const pc = element.querySelector('.pulse-child');
+          if (!pc) {
+            const pulseEl = document.createElement('div');
+            pulseEl.style.backgroundColor = backgroundColor || '#bebebe82';
+
+            if (element.classList.contains('pulsable-circle')) {
+              pulseEl.classList.add(
+                'pulse-child',
+                'pulse-animate',
+                'pulse-child-circle'
+              );
+            } else if (element.classList.contains('pulsable-hidden')) {
+              pulseEl.classList.add(
+                'pulse-child',
+                'pulse-animate',
+                'pulse-child-hidden'
+              );
+            } else if (element.classList.contains('pulsable-para')) {
+              const res = countLines(element);
+              pulseEl.classList.add('pulse-child', 'pulse-child-para-cont');
+              const gap =
+                (res.height - res.font_size * res.lines) / (res.lines + 2);
+              pulseEl.style.gap = `${Math.max(gap, 8)}px`;
+
+              pulseEl.style.height = `${res.height - gap * 2}px`;
+              pulseEl.style.paddingTop = pulseEl.style.gap;
+              pulseEl.style.paddingBottom = pulseEl.style.gap;
+
+              const pulsePara = document.createElement('div');
+              pulsePara.style.backgroundColor = backgroundColor || '#bebebe82';
+              pulsePara.classList.add('pulse-animate', 'pulse-child-para');
+
+              Array.from(Array(res.lines).keys()).forEach(async () => {
+                pulseEl.appendChild(pulsePara.cloneNode(true));
+              });
+            } else if (noRadius) {
+              pulseEl.classList.add(
+                'pulse-child',
+                'pulse-animate',
+                'pulse-child-rect-sharp'
+              );
+            } else if (noPadding) {
+              pulseEl.classList.add(
+                'pulse-child',
+                'pulse-animate',
+                'pulse-child-rect-full'
+              );
+            } else {
+              pulseEl.classList.add(
+                'pulse-child',
+                'pulse-animate',
+                'pulse-child-rect'
+              );
+            }
+
+            if (element.classList.contains('pulsable-img')) {
+              pulseEl.appendChild(iSvg);
+            }
+
+            element.parentNode?.appendChild(pulseEl);
+            element.appendChild(pulseEl);
           }
         });
 
-        const pc = element.querySelector('.pulse-child');
-        if (!pc) {
-          const pulseEl = document.createElement('div');
-          pulseEl.style.backgroundColor = backgroundColor || '#bebebe82';
-
-          if (element.classList.contains('pulsable-circle')) {
-            pulseEl.classList.add(
-              'pulse-child',
-              'pulse-animate',
-              'pulse-child-circle'
-            );
-          } else if (element.classList.contains('pulsable-hidden')) {
-            pulseEl.classList.add(
-              'pulse-child',
-              'pulse-animate',
-              'pulse-child-hidden'
-            );
-          } else if (noRadius) {
-            pulseEl.classList.add(
-              'pulse-child',
-              'pulse-animate',
-              'pulse-child-rect-sharp'
-            );
-          } else if (noPadding) {
-            pulseEl.classList.add(
-              'pulse-child',
-              'pulse-animate',
-              'pulse-child-rect-full'
-            );
-          } else {
-            pulseEl.classList.add(
-              'pulse-child',
-              'pulse-animate',
-              'pulse-child-rect'
-            );
-          }
-
-          if (element.classList.contains('pulsable-img')) {
-            pulseEl.appendChild(iSvg);
-          }
-
-          element.parentNode?.appendChild(pulseEl);
-          element.appendChild(pulseEl);
+        setCalculating(false);
+      } else {
+        if (!ref.current) {
+          return;
         }
-      });
 
-      setCalculating(false);
-    } else {
-      if (!ref.current) {
-        return;
+        ref.current.querySelectorAll('.pulse-child').forEach(async (v) => {
+          v.parentNode?.removeChild(v);
+        });
+
+        ref.current.querySelectorAll('.pulse-element').forEach(async (v) => {
+          if (v.classList) {
+            v.classList.remove('pulse-element');
+          }
+        });
+
+        ref.current
+          .querySelectorAll('.pulse-has-disabled-attr')
+          .forEach(async (element) => {
+            element.removeAttribute('disabled');
+            element.classList.remove('pulse-has-disabled-attr');
+          });
+
+        ref.current
+          .querySelectorAll('.pulse-child-element')
+          .forEach(async (element) => {
+            element.classList.remove('pulse-child-element');
+          });
+
+        setCalculating(false);
       }
-
-      ref.current.querySelectorAll('.pulse-child').forEach((v) => {
-        v.parentNode?.removeChild(v);
-      });
-
-      ref.current.querySelectorAll('.pulse-element').forEach((v) => {
-        if (v.classList) {
-          v.classList.remove('pulse-element');
-        }
-      });
-
-      ref.current
-        .querySelectorAll('.pulse-has-disabled-attr')
-        .forEach((element) => {
-          element.removeAttribute('disabled');
-          element.classList.remove('pulse-has-disabled-attr');
-        });
-
-      ref.current
-        .querySelectorAll('.pulse-child-element')
-        .forEach((element) => {
-          element.classList.remove('pulse-child-element');
-        });
-
-      setCalculating(false);
-    }
+    })();
   }, [isLoading, ref.current]);
 
   return (

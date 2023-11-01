@@ -23,16 +23,44 @@ const TestUI = () => {
         onClick={() => setIsLoading((s) => !s)}
         className="pulsable"
         style={{
-          backgroundColor: isLoading ? 'red' : 'green',
-          color: 'white',
+          fontSize: '18px',
+          background: 'skyblue',
           padding: '10px 20px',
           border: 'none',
           borderRadius: '5px',
           cursor: 'pointer',
         }}
       >
-        {isLoading ? 'Stop Loading' : 'Start Loading'}
+        <div>
+          <input onChange={() => {}} type="checkbox" checked={isLoading} />
+          Loading
+        </div>
       </button>
+
+      <Pulsable noRadius isLoading={isLoading}>
+        <p
+          style={{
+            lineHeight: '60px',
+          }}
+          className="pulsable pulsable-para leading-relaxed tracking-wide"
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quae
+          voluptatum, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quae
+          voluptatum, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Quisquam quae voluptatum, Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Quisquam quae voluptatum, Quisquam quae voluptatum,
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quae
+          voluptatum, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Quisquam quae voluptatum, Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing
+          elit. Quisquam quae voluptatum, Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Quisquam quae voluptatum, Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Quisquam quae voluptatum, Quisquam quae
+          voluptatum, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Quisquam quae voluptatum,
+        </p>
+      </Pulsable>
 
       <Pulsable noRadius isLoading={isLoading}>
         <ProfileCard />
