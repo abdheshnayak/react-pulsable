@@ -38,12 +38,7 @@ const TestUI = () => {
       </button>
 
       <Pulsable noRadius isLoading={isLoading}>
-        <p
-          style={{
-            lineHeight: '60px',
-          }}
-          className="pulsable pulsable-para leading-relaxed tracking-wide"
-        >
+        <p className="pulsable pulsable-para leading-relaxed tracking-wide">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quae
           voluptatum, Lorem ipsum dolor sit amet consectetur adipisicing elit.
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quae

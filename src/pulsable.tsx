@@ -45,8 +45,9 @@ const Pulsable = ({
   const ref = useRef<HTMLDivElement>(null);
   const [isCalculating, setCalculating] = useState(true);
   useEffect(() => {
-    setCalculating(true);
-    (async () => {
+    const manp = () => {
+      setCalculating(true);
+
       if (isLoading) {
         if (!ref.current) {
           return;
@@ -56,7 +57,7 @@ const Pulsable = ({
         iSvg.classList.add('pulse-svg-cont');
         iSvg.innerHTML = iPlaceholder;
 
-        ref.current.querySelectorAll('.pulsable').forEach(async (element) => {
+        ref.current.querySelectorAll('.pulsable').forEach((element) => {
           element.classList.add('pulse-element');
 
           if (!element.hasAttribute('disabled')) {
@@ -64,7 +65,7 @@ const Pulsable = ({
             element.setAttribute('disabled', 'true');
           }
 
-          element.childNodes.forEach(async (ch: any) => {
+          element.childNodes.forEach((ch: any) => {
             if (ch.classList && !ch.classList.contains('pulse-child')) {
               ch.classList.add('pulse-child-element');
 
@@ -107,7 +108,7 @@ const Pulsable = ({
               pulsePara.style.backgroundColor = backgroundColor || '#bebebe82';
               pulsePara.classList.add('pulse-animate', 'pulse-child-para');
 
-              Array.from(Array(res.lines).keys()).forEach(async () => {
+              Array.from(Array(res.lines).keys()).forEach(() => {
                 pulseEl.appendChild(pulsePara.cloneNode(true));
               });
             } else if (noRadius) {
@@ -145,11 +146,11 @@ const Pulsable = ({
           return;
         }
 
-        ref.current.querySelectorAll('.pulse-child').forEach(async (v) => {
+        ref.current.querySelectorAll('.pulse-child').forEach((v) => {
           v.parentNode?.removeChild(v);
         });
 
-        ref.current.querySelectorAll('.pulse-element').forEach(async (v) => {
+        ref.current.querySelectorAll('.pulse-element').forEach((v) => {
           if (v.classList) {
             v.classList.remove('pulse-element');
           }
@@ -157,20 +158,22 @@ const Pulsable = ({
 
         ref.current
           .querySelectorAll('.pulse-has-disabled-attr')
-          .forEach(async (element) => {
+          .forEach((element) => {
             element.removeAttribute('disabled');
             element.classList.remove('pulse-has-disabled-attr');
           });
 
         ref.current
           .querySelectorAll('.pulse-child-element')
-          .forEach(async (element) => {
+          .forEach((element) => {
             element.classList.remove('pulse-child-element');
           });
 
         setCalculating(false);
       }
-    })();
+    };
+
+    requestAnimationFrame(manp);
   }, [isLoading, ref.current]);
 
   return (
