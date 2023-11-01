@@ -38,23 +38,34 @@ const TestUI = () => {
       </button>
 
       <Pulsable noRadius isLoading={isLoading}>
-        <p className="pulsable pulsable-para leading-relaxed tracking-wide">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quae
-          voluptatum, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quae
-          voluptatum, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Quisquam quae voluptatum, Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Quisquam quae voluptatum, Quisquam quae voluptatum,
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quae
-          voluptatum, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Quisquam quae voluptatum, Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Quisquam quae voluptatum, Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Quisquam quae voluptatum, Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Quisquam quae voluptatum, Quisquam quae
-          voluptatum, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Quisquam quae voluptatum,
-        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '16px',
+            alignItems: 'center',
+          }}
+        >
+          <img
+            style={{
+              width: '200px',
+              height: '200px',
+            }}
+            src="/logo.png"
+            alt="logo"
+          />
+          <p className="pulsable pulsable-para leading-relaxed tracking-wide">
+            voluptatum, Quisquam quae voluptatum, Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Quisquam quae voluptatum, voluptatum,
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+            quae voluptatum, Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quisquam quae voluptatum, Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Quisquam quae voluptatum, Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Quisquam quae voluptatum,
+            Quisquam quae voluptatum, Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Quisquam quae voluptatum,
+          </p>
+        </div>
       </Pulsable>
 
       <Pulsable noRadius isLoading={isLoading}>
