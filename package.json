@@ -2,10 +2,10 @@
   "name": "react-pulsable",
   "author": "Abdhesh Nayak",
   "license": "MIT",
-  "version": "0.0.9",
+  "version": "0.0.91",
   "description": "This is a simple react component that can be used to wrap other components and add a pulsing/skeleton effect to them.",
   "private": false,
-  "types": "./dist/@types/index.d.ts",
+  "types": "./dist/@types/pulsable.d.ts",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "sideEffects": false,
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/abdheshnayak/react-pulsable.git"
+    "url": "git+https://github.com/OpenSource-HQ/react-pulsable.git"
   },
   "keywords": [
     "react",
@@ -54,7 +54,7 @@
     "pack": "npm pack --pack-destination ./out",
     "clean": "rimraf dist",
     "dev:build": "npm run build",
-    "tsc": "tsc --emitDeclarationOnly --outDir ./dist/@types",
+    "tsc": "tsc --emitDeclarationOnly --p tsconfig-compile.json --outDir ./dist/@types ",
     "build:css": "tailwindcss -i ./src/scss/build.scss -o ./src/css/index.scss"
   },
   "dependencies": {
