@@ -111,21 +111,29 @@ const Pulsable = ({
               bgColors?.light || 'rgba(130, 130, 130, 0.2)'
             );
 
+            pulseEl.classList.add('pulse-child');
+
+            if (noRadius && !pulseEl.classList.contains('pulsable-circle')) {
+              pulseEl.classList.add('pulse-no-rounded');
+            }
+
             if (element.classList.contains('pulsable-circle')) {
               pulseEl.classList.add(
-                'pulse-child',
                 pulseClassNames[animation],
                 'pulse-child-circle'
               );
             } else if (element.classList.contains('pulsable-hidden')) {
               pulseEl.classList.add(
-                'pulse-child',
                 pulseClassNames[animation],
                 'pulse-child-hidden'
               );
             } else if (element.classList.contains('pulsable-para')) {
               const res = countLines(element);
-              pulseEl.classList.add('pulse-child', 'pulse-child-para-cont');
+              pulseEl.classList.add(
+                'pulse-child-para-cont',
+                'pulse-no-rounded'
+              );
+
               const gap =
                 (res.height - res.font_size * res.lines) / (res.lines + 2);
 
@@ -153,6 +161,10 @@ const Pulsable = ({
                 bgColors?.light || 'rgba(130, 130, 130, 0.2)'
               );
 
+              if (noRadius) {
+                pulsePara.classList.add('pulse-no-rounded');
+              }
+
               pulsePara.classList.add(
                 pulseClassNames[animation],
                 'pulse-child-para'
@@ -161,21 +173,13 @@ const Pulsable = ({
               for (let i = 0; i < res.lines; i++) {
                 pulseEl.appendChild(pulsePara.cloneNode(true));
               }
-            } else if (noRadius) {
-              pulseEl.classList.add(
-                'pulse-child',
-                pulseClassNames[animation],
-                'pulse-child-rect-sharp'
-              );
             } else if (noPadding) {
               pulseEl.classList.add(
-                'pulse-child',
                 pulseClassNames[animation],
                 'pulse-child-rect-full'
               );
             } else {
               pulseEl.classList.add(
-                'pulse-child',
                 pulseClassNames[animation],
                 'pulse-child-rect'
               );
