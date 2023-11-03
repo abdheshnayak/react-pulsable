@@ -8,7 +8,10 @@ interface bgColors {
   light: string;
 }
 
+type pulseAnimation = 'none' | 'pulse' | 'wave' | 'wave-reverse';
+
 export interface Props {
+  animation?: pulseAnimation;
   children: ReactNode;
   isLoading: boolean;
   bgColors?: bgColors;
@@ -17,6 +20,15 @@ export interface Props {
   className?: string;
   [key: string]: any;
 }
+
+const pulseClassNames: {
+  [key: string]: string;
+} = {
+  pulse: 'pulse-animate',
+  wave: 'pulse-animate-wave',
+  'wave-reverse': 'pulse-animate-wave-reverse',
+  none: 'pulse-animate-none',
+};
 
 function countLines(target: Element) {
   var style = window.getComputedStyle(target, null);
@@ -43,6 +55,7 @@ function countLines(target: Element) {
 }
 
 const Pulsable = ({
+  animation = 'wave',
   children,
   isLoading,
   bgColors,
@@ -101,13 +114,13 @@ const Pulsable = ({
             if (element.classList.contains('pulsable-circle')) {
               pulseEl.classList.add(
                 'pulse-child',
-                'pulse-animate',
+                pulseClassNames[animation],
                 'pulse-child-circle'
               );
             } else if (element.classList.contains('pulsable-hidden')) {
               pulseEl.classList.add(
                 'pulse-child',
-                'pulse-animate',
+                pulseClassNames[animation],
                 'pulse-child-hidden'
               );
             } else if (element.classList.contains('pulsable-para')) {
@@ -140,7 +153,10 @@ const Pulsable = ({
                 bgColors?.light || 'rgba(130, 130, 130, 0.2)'
               );
 
-              pulsePara.classList.add('pulse-animate', 'pulse-child-para');
+              pulsePara.classList.add(
+                pulseClassNames[animation],
+                'pulse-child-para'
+              );
 
               for (let i = 0; i < res.lines; i++) {
                 pulseEl.appendChild(pulsePara.cloneNode(true));
@@ -148,19 +164,19 @@ const Pulsable = ({
             } else if (noRadius) {
               pulseEl.classList.add(
                 'pulse-child',
-                'pulse-animate',
+                pulseClassNames[animation],
                 'pulse-child-rect-sharp'
               );
             } else if (noPadding) {
               pulseEl.classList.add(
                 'pulse-child',
-                'pulse-animate',
+                pulseClassNames[animation],
                 'pulse-child-rect-full'
               );
             } else {
               pulseEl.classList.add(
                 'pulse-child',
-                'pulse-animate',
+                pulseClassNames[animation],
                 'pulse-child-rect'
               );
             }

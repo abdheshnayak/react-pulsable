@@ -14,34 +14,54 @@
 
     @keyframes wave-lines {
       0% {
-        background-position: -468px 0;
+        background-position: -358px 0;
       }
       100% {
-        background-position: 468px 0;
-      }
-    }
-    @keyframes wave-squares {
-      0% {
-        background-position: -468px 0;
-      }
-      100% {
-        background-position: 468px 0;
+        background-position: 438px 0;
       }
     }
 
+    @keyframes wave-lines-reverse {
+      0% {
+        background-position: 358px 0;
+      }
+      100% {
+        background-position: -438px 0;
+      }
+    }
 
     &.pulse-calculating{
       outline: none !important;
       opacity: 0 !important;
     }
 
+    .pulse-animate-none{
+      background: var(--color-transparent-medium, rgba(130, 130, 130, 0.2));
+     }
+
     .pulse-animate{
-      background: var(--color-transparent-light, rgba(130, 130, 130, 0.2)); /* Fallback value */
-      background: -webkit-gradient(linear, left top, right top, color-stop(8%, var(--color-transparent-light, rgba(130, 130, 130, 0.2))), color-stop(18%, var(--color-transparent-medium, rgba(130, 130, 130, 0.3))), color-stop(33%, var(--color-transparent-light, rgba(130, 130, 130, 0.2))));
+      @apply animate-pulse;
+      background: var(--color-transparent-light, rgba(130, 130, 130, 0.2));
+     }
+
+    .pulse-animate-wave{
+      background: var(--color-transparent-light, rgba(130, 130, 130, 0.2));
+      background: -webkit-gradient(linear, right top, left top, color-stop(8%, var(--color-transparent-light, rgba(130, 130, 130, 0.2))), color-stop(18%, var(--color-transparent-medium, rgba(130, 130, 130, 0.3))), color-stop(33%, var(--color-transparent-light, rgba(130, 130, 130, 0.2))));
       background: linear-gradient(to right, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 8%, var(--color-transparent-medium, rgba(130, 130, 130, 0.3)) 18%, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 33%);
       background-size: 800px 100px;
 
       animation: wave-lines 2s infinite ease-out;
+     }
+
+    .pulse-animate-wave-reverse{
+
+      background: var(--color-transparent-light, rgba(130, 130, 130, 0.2));
+      background: -webkit-gradient(linear, right top, left top, color-stop(33%, var(--color-transparent-light, rgba(130, 130, 130, 0.2))), color-stop(18%, var(--color-transparent-medium, rgba(130, 130, 130, 0.3))), color-stop(8%, var(--color-transparent-light, rgba(130, 130, 130, 0.2))));
+      background: linear-gradient(to left, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 8%, var(--color-transparent-medium, rgba(130, 130, 130, 0.3)) 18%, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 33%);
+      background-size: 800px 100px;
+
+
+      animation: wave-lines-reverse 2s infinite ease-in-out;
      }
 
     .pulse-svg-cont{
@@ -52,12 +72,12 @@
       top: 0 !important;
       left: 0 !important;
       opacity: 0.7;
-            svg{
-              position: absolute !important;
-              transform: translate(-50%, -50%) !important;
-              left: 50% !important;
-              top: 50% !important;
-            }
+        svg{
+          position: absolute !important;
+          transform: translate(-50%, -50%) !important;
+          left: 50% !important;
+          top: 50% !important;
+        }
     }
 
     .pulse-element{

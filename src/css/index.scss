@@ -13,51 +13,77 @@
     /* Standard syntax */
     @-webkit-keyframes wave-lines {
       0% {
-        background-position: -468px 0;
+        background-position: -358px 0;
       }
 
       100% {
-        background-position: 468px 0;
+        background-position: 438px 0;
       }
     }
     @keyframes wave-lines {
       0% {
-        background-position: -468px 0;
+        background-position: -358px 0;
       }
 
       100% {
-        background-position: 468px 0;
+        background-position: 438px 0;
       }
     }
-    @-webkit-keyframes wave-squares {
+    @-webkit-keyframes wave-lines-reverse {
       0% {
-        background-position: -468px 0;
+        background-position: 358px 0;
       }
 
       100% {
-        background-position: 468px 0;
+        background-position: -438px 0;
       }
     }
-    @keyframes wave-squares {
+    @keyframes wave-lines-reverse {
       0% {
-        background-position: -468px 0;
+        background-position: 358px 0;
       }
 
       100% {
-        background-position: 468px 0;
+        background-position: -438px 0;
       }
     }
     &.pulse-calculating{
       outline: none !important;
       opacity: 0 !important;
     }
+    .pulse-animate-none{
+      background: var(--color-transparent-medium, rgba(130, 130, 130, 0.2));
+    }
+    @-webkit-keyframes pulse {
+      50% {
+        opacity: .5;
+      }
+    }
+    @keyframes pulse {
+      50% {
+        opacity: .5;
+      }
+    }
+    .pulse-animate {
+      -webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+              animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
     .pulse-animate{
       background: var(--color-transparent-light, rgba(130, 130, 130, 0.2));
-      /* Fallback value */
+    }
+    .pulse-animate-wave{
+      background: var(--color-transparent-light, rgba(130, 130, 130, 0.2));
       background: linear-gradient(to right, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 8%, var(--color-transparent-medium, rgba(130, 130, 130, 0.3)) 18%, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 33%);
       background-size: 800px 100px;
       -webkit-animation: wave-lines 2s infinite ease-out;
               animation: wave-lines 2s infinite ease-out;
+    }
+    .pulse-animate-wave-reverse{
+      background: var(--color-transparent-light, rgba(130, 130, 130, 0.2));
+      background: linear-gradient(to left, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 8%, var(--color-transparent-medium, rgba(130, 130, 130, 0.3)) 18%, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 33%);
+      background-size: 800px 100px;
+      -webkit-animation: wave-lines-reverse 2s infinite ease-in-out;
+              animation: wave-lines-reverse 2s infinite ease-in-out;
     }
     .pulse-svg-cont{
       position: absolute !important;

@@ -64,7 +64,7 @@ const TestUI = () => {
         </div>
       </button>
 
-      <Pulsable noRadius isLoading={isLoading}>
+      <Pulsable animation="wave-reverse" noRadius isLoading={isLoading}>
         <div
           style={{
             display: 'flex',
