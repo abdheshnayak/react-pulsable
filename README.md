@@ -65,6 +65,7 @@ The component takes two props:
   - `medium`: the medium color of the background.
 - `noRadius`: a boolean that indicates whether the pulsing effect should have rounded corners or not. By default it has rounded corners.
 - `noPadding`: a boolean that indicates whether the pulsing effect should have padding in each skeleton items or not. By default it has padding.
+- `className`: as Pulsable component is a wrapper component, you can pass className or alomost all attributes of div element.[means you can treat it as a div, and use accordingly]
 
 > check [example](https://codesandbox.io/s/k7fdzw?file=/src/App.js) for more.
 

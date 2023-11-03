@@ -14,6 +14,8 @@ export interface Props {
   bgColors?: bgColors;
   noRadius?: boolean;
   noPadding?: boolean;
+  className?: string;
+  [key: string]: any;
 }
 
 function countLines(target: Element) {
@@ -46,6 +48,8 @@ const Pulsable = ({
   bgColors,
   noRadius = false,
   noPadding = false,
+  className,
+  ...props
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isCalculating, setCalculating] = useState(true);
@@ -209,10 +213,15 @@ const Pulsable = ({
   return (
     <div
       ref={ref}
-      className={cn('pulse-container', {
-        'pulse-calculating pulse-container-css': isLoading && isCalculating,
-        'pulse-container-css': isLoading,
-      })}
+      className={cn(
+        'pulse-container',
+        {
+          'pulse-calculating pulse-container-css': isLoading && isCalculating,
+          'pulse-container-css': isLoading,
+        },
+        className
+      )}
+      {...props}
     >
       {children}
     </div>
