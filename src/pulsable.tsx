@@ -3,10 +3,15 @@ import cn from 'classnames';
 import './css/index.scss';
 import { iPlaceholder } from './image-placeholder';
 
+interface bgColors {
+  medium: string;
+  light: string;
+}
+
 export interface Props {
   children: ReactNode;
   isLoading: boolean;
-  backgroundColor?: string;
+  bgColors?: bgColors;
   noRadius?: boolean;
   noPadding?: boolean;
 }
@@ -38,7 +43,7 @@ function countLines(target: Element) {
 const Pulsable = ({
   children,
   isLoading,
-  backgroundColor,
+  bgColors,
   noRadius = false,
   noPadding = false,
 }: Props) => {
@@ -79,7 +84,15 @@ const Pulsable = ({
           const pc = element.querySelector('.pulse-child');
           if (!pc) {
             const pulseEl = document.createElement('div');
-            pulseEl.style.backgroundColor = backgroundColor || '#bebebe82';
+            pulseEl.style.setProperty(
+              '--color-transparent-medium',
+              bgColors?.medium || 'rgba(130, 130, 130, 0.3)'
+            );
+
+            pulseEl.style.setProperty(
+              '--color-transparent-light',
+              bgColors?.light || 'rgba(130, 130, 130, 0.2)'
+            );
 
             if (element.classList.contains('pulsable-circle')) {
               pulseEl.classList.add(
@@ -98,19 +111,36 @@ const Pulsable = ({
               pulseEl.classList.add('pulse-child', 'pulse-child-para-cont');
               const gap =
                 (res.height - res.font_size * res.lines) / (res.lines + 2);
-              pulseEl.style.gap = `${Math.max(gap, 8)}px`;
 
-              pulseEl.style.height = `${res.height - gap * 2}px`;
-              pulseEl.style.paddingTop = pulseEl.style.gap;
-              pulseEl.style.paddingBottom = pulseEl.style.gap;
+              const gapString = `${Math.max(gap, 8)}px`;
+
+              // pulseEl.style.setProperty('gap', gapString);
+
+              // pulseEl.style.setProperty('height', `${res.height - gap * 2}px`);
+              pulseEl.style.setProperty('padding-top', gapString);
+              pulseEl.style.setProperty('padding-bottom', gapString);
 
               const pulsePara = document.createElement('div');
-              pulsePara.style.backgroundColor = backgroundColor || '#bebebe82';
+
+              pulsePara.style.setProperty(
+                'height',
+                `${(res.font_size * 80) / 100}px`
+              );
+              pulsePara.style.setProperty(
+                '--color-transparent-medium',
+                bgColors?.medium || 'rgba(130, 130, 130, 0.3)'
+              );
+
+              pulsePara.style.setProperty(
+                '--color-transparent-light',
+                bgColors?.light || 'rgba(130, 130, 130, 0.2)'
+              );
+
               pulsePara.classList.add('pulse-animate', 'pulse-child-para');
 
-              Array.from(Array(res.lines).keys()).forEach(() => {
+              for (let i = 0; i < res.lines; i++) {
                 pulseEl.appendChild(pulsePara.cloneNode(true));
-              });
+              }
             } else if (noRadius) {
               pulseEl.classList.add(
                 'pulse-child',

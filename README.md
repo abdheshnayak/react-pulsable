@@ -9,59 +9,62 @@ This is a simple react component that can be used to wrap other components and a
 ## Example 1
 
 ```jsx
-import React, { useState } from 'react';
-import Pulsable from 'react-pulsable';
-import 'react-pulsable/index.css';
-
-const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
+const App = ({ isLoading }: { isLoading: boolean }) => {
   return (
-    <div>
-      <Pulsable isLoading={isLoading} backgroundColor="red">
-        <div>
-          <h1>React Form with Pulsable</h1>
-          <form style={formStyle}>
-            <label htmlFor="name" className="pulsable">
-              Name:
-            </label>
-            <div className="pulsable">
-              <input type="text" id="name" style={{ width: '100%' }} />
-            </div>
-
-            <label htmlFor="email" className="pulsable">
-              Email:
-            </label>
-            <div className="pulsable" disabled>
-              <input type="email" id="email" style={{ width: '100%' }} />
-            </div>
-
-            <button
-              className="pulsable"
-              type="submit">
-              Submit
-            </button>
-          </form>
-        </div>
+    <>
+      {/* default background */}
+      <Pulsable isLoading={isLoading}>
+        <YourComponent2 />
       </Pulsable>
 
-      <button
-        onClick={() => setIsLoading((s) => !s)}
-        {isLoading ? 'Stop Loading' : 'Start Loading'}
-      </button>
-    </div>
+      {/* custom background */}
+      <Pulsable
+        isLoading={isLoading}
+        bgColors={{
+          light: 'rgba(0, 128, 0, 0.2)',
+          medium: 'rgba(0, 128, 0, 0.3)',
+        }}
+      >
+        <YourComponent />
+      </Pulsable>
+
+      {/* custom background with no rounded corners */}
+      <Pulsable
+        noRadius
+        isLoading={isLoading}
+        bgColors={{
+          light: 'rgba(0, 0, 255, 0.2)',
+          medium: 'rgba(0, 0, 255, 0.3)',
+        }}
+      >
+        <YourComponent />
+      </Pulsable>
+
+      {/* custom background with no padding in each skeleton items */}
+      <Pulsable
+        noPadding
+        isLoading={isLoading}
+        bgColors={{
+          light: 'tomato',
+          medium: 'orange',
+        }}
+      >
+        <YourComponent />
+      </Pulsable>
+    </>
   );
 };
-
-export default App;
 ```
 
 ## Usage Guide
 
 The component takes two props:
 - `isLoading`: a boolean that indicates whether the component should be pulsing or not.
-- `backgroundColor`: a string that indicates the background color of the pulsing effect. It can be any valid css color value.
+- `bgColors`: an object that contains the background colors for the pulsing effect. It has two properties:
+  - `light`: the light color of the background.
+  - `medium`: the medium color of the background.
 - `noRadius`: a boolean that indicates whether the pulsing effect should have rounded corners or not. By default it has rounded corners.
+- `noPadding`: a boolean that indicates whether the pulsing effect should have padding in each skeleton items or not. By default it has padding.
 
 > check [example](https://codesandbox.io/s/k7fdzw?file=/src/App.js) for more.
 

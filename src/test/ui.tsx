@@ -1,35 +1,62 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
 import Pulsable from '../pulsable';
-import '../css/index.scss';
 import './ui.css';
+
+const App = ({ isLoading }: { isLoading: boolean }) => {
+  return (
+    <>
+      {/* default background */}
+      <Pulsable isLoading={isLoading}>
+        <YourComponent2 />
+      </Pulsable>
+
+      {/* custom background */}
+      <Pulsable
+        isLoading={isLoading}
+        bgColors={{
+          light: 'rgba(0, 128, 0, 0.2)',
+          medium: 'rgba(0, 128, 0, 0.3)',
+        }}
+      >
+        <YourComponent />
+      </Pulsable>
+
+      {/* custom background with no rounded corners */}
+      <Pulsable
+        noRadius
+        isLoading={isLoading}
+        bgColors={{
+          light: 'rgba(0, 0, 255, 0.2)',
+          medium: 'rgba(0, 0, 255, 0.3)',
+        }}
+      >
+        <YourComponent />
+      </Pulsable>
+
+      {/* custom background with no padding in each skeleton items */}
+      <Pulsable
+        noPadding
+        isLoading={isLoading}
+        bgColors={{
+          light: 'tomato',
+          medium: 'orange',
+        }}
+      >
+        <YourComponent />
+      </Pulsable>
+    </>
+  );
+};
 
 const TestUI = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-        margin: '0 auto',
-        maxWidth: '40rem',
-        width: '100%',
-        // alignItems: "flex-center"
-      }}
-    >
+    <div className="main">
       <button
         onClick={() => setIsLoading((s) => !s)}
-        className="pulsable"
-        style={{
-          fontSize: '18px',
-          background: 'skyblue',
-          padding: '10px 20px',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-        }}
+        className="loading-button"
       >
         <div>
           <input onChange={() => {}} type="checkbox" checked={isLoading} />
@@ -68,26 +95,12 @@ const TestUI = () => {
         </div>
       </Pulsable>
 
-      <Pulsable noRadius isLoading={isLoading}>
-        <ProfileCard />
-      </Pulsable>
-
-      <Pulsable isLoading={isLoading} backgroundColor="orange">
-        <FormComp />
-      </Pulsable>
-
-      <Pulsable isLoading={isLoading} backgroundColor="gray">
-        <FormComp />
-      </Pulsable>
-
-      <Pulsable isLoading={isLoading} backgroundColor="skyblue">
-        <FormComp />
-      </Pulsable>
+      <App isLoading={isLoading} />
     </div>
   );
 };
 
-const FormComp = () => {
+const YourComponent = () => {
   return (
     <form>
       <label htmlFor="name" className="pulsable">
@@ -111,7 +124,7 @@ const FormComp = () => {
   );
 };
 
-const ProfileCard = () => {
+const YourComponent2 = () => {
   return (
     <div className="profile-card">
       <div className="profile-picture pulsable pulsable-circle pulsable-img">

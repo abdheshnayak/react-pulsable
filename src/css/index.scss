@@ -11,23 +11,53 @@
     pointer-events: none !important;
     user-select: none;
     /* Standard syntax */
+    @-webkit-keyframes wave-lines {
+      0% {
+        background-position: -468px 0;
+      }
+
+      100% {
+        background-position: 468px 0;
+      }
+    }
+    @keyframes wave-lines {
+      0% {
+        background-position: -468px 0;
+      }
+
+      100% {
+        background-position: 468px 0;
+      }
+    }
+    @-webkit-keyframes wave-squares {
+      0% {
+        background-position: -468px 0;
+      }
+
+      100% {
+        background-position: 468px 0;
+      }
+    }
+    @keyframes wave-squares {
+      0% {
+        background-position: -468px 0;
+      }
+
+      100% {
+        background-position: 468px 0;
+      }
+    }
     &.pulse-calculating{
       outline: none !important;
       opacity: 0 !important;
     }
-    @-webkit-keyframes pulse {
-      50% {
-        opacity: .5;
-      }
-    }
-    @keyframes pulse {
-      50% {
-        opacity: .5;
-      }
-    }
-    .pulse-animate {
-      -webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-              animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    .pulse-animate{
+      background: var(--color-transparent-light, rgba(130, 130, 130, 0.2));
+      /* Fallback value */
+      background: linear-gradient(to right, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 8%, var(--color-transparent-medium, rgba(130, 130, 130, 0.3)) 18%, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 33%);
+      background-size: 800px 100px;
+      -webkit-animation: wave-lines 2s infinite ease-out;
+              animation: wave-lines 2s infinite ease-out;
     }
     .pulse-svg-cont{
       position: absolute !important;
@@ -69,17 +99,18 @@
       position: absolute !important;
       z-index: 1 !important;
       width: 100% !important;
+      height: 100% !important;
       top: 0% !important;
       left: 0 !important;
       display: flex !important;
       flex-direction: column !important;
+      justify-content: space-between !important;
     }
     .pulse-child-para{
       position: relative !important;
       z-index: 1 !important;
       border-radius: 5px !important;
       width: 100% !important;
-      flex: 1 !important;
     }
     .pulse-child-rect-full{
       position: absolute !important;

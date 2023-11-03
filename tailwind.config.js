@@ -5,4 +5,12 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+
+  keyframes: {
+    shimmer: {
+      '100%': {
+        transform: 'translateX(100%)',
+      },
+    },
+  },
 };

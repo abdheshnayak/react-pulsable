@@ -9,13 +9,39 @@
 
     user-select: none; /* Standard syntax */
 
+
+
+
+    @keyframes wave-lines {
+      0% {
+        background-position: -468px 0;
+      }
+      100% {
+        background-position: 468px 0;
+      }
+    }
+    @keyframes wave-squares {
+      0% {
+        background-position: -468px 0;
+      }
+      100% {
+        background-position: 468px 0;
+      }
+    }
+
+
     &.pulse-calculating{
       outline: none !important;
       opacity: 0 !important;
     }
 
     .pulse-animate{
-      @apply animate-pulse;
+      background: var(--color-transparent-light, rgba(130, 130, 130, 0.2)); /* Fallback value */
+      background: -webkit-gradient(linear, left top, right top, color-stop(8%, var(--color-transparent-light, rgba(130, 130, 130, 0.2))), color-stop(18%, var(--color-transparent-medium, rgba(130, 130, 130, 0.3))), color-stop(33%, var(--color-transparent-light, rgba(130, 130, 130, 0.2))));
+      background: linear-gradient(to right, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 8%, var(--color-transparent-medium, rgba(130, 130, 130, 0.3)) 18%, var(--color-transparent-light, rgba(130, 130, 130, 0.2)) 33%);
+      background-size: 800px 100px;
+
+      animation: wave-lines 2s infinite ease-out;
      }
 
     .pulse-svg-cont{
@@ -62,11 +88,13 @@
       position: absolute !important;
       z-index: 1 !important;
       width: 100% !important;
+      height: 100% !important;
       top: 0% !important;
       left: 0 !important;
 
       display: flex !important;
       flex-direction: column !important;
+      justify-content: space-between !important;
      }
 
     .pulse-child-para{
@@ -74,7 +102,6 @@
       z-index: 1 !important;
       border-radius: 5px !important;
       width: 100% !important;
-      flex: 1 !important;
      }
 
     .pulse-child-rect-full{
