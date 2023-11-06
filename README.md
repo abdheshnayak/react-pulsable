@@ -6,7 +6,7 @@ This is a simple react component that can be used to wrap other components and a
 
 ![Demo Image](./screenshot.png)
 
-## Example 1
+### Example 1
 
 ```jsx
 const App = ({ isLoading }: { isLoading: boolean }) => {
@@ -57,9 +57,37 @@ const App = ({ isLoading }: { isLoading: boolean }) => {
 };
 ```
 
+### Component Example
+
+```jsx
+const YourComponent = () => {
+  return (
+    <form>
+      <label htmlFor="name" className="pulsable">
+        Name:
+      </label>
+      <div className="pulsable">
+        <input type="text" id="name" />
+      </div>
+
+      <label htmlFor="email" className="pulsable">
+        Email:
+      </label>
+      <div className="pulsable">
+        <input type="email" id="email" />
+      </div>
+
+      <button className="pulsable" type="submit">
+        Submit
+      </button>
+    </form>
+  );
+};
+```
+
 ## Usage Guide
 
-The component takes two props:
+The component takes following props:
 - `isLoading`: a boolean that indicates whether the component should be pulsing or not.
 - `bgColors`: an object that contains the background colors for the pulsing effect. It has two properties:
   - `light`: the light color of the background.

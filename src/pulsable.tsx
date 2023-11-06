@@ -66,12 +66,77 @@ const Pulsable = ({
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isCalculating, setCalculating] = useState(true);
+
+  const getComps = () => {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+    const el = document.createElement('div');
+
+    const pulseParaCont = el.cloneNode(true) as HTMLDivElement;
+    pulseParaCont.classList.add(
+      'pulse-child-para-cont',
+      'pulse-no-rounded',
+      'pulse-child'
+    );
+
+    el.style.setProperty(
+      '--color-transparent-medium',
+      bgColors?.medium || 'rgba(130, 130, 130, 0.3)'
+    );
+
+    el.style.setProperty(
+      '--color-transparent-light',
+      bgColors?.light || 'rgba(130, 130, 130, 0.2)'
+    );
+    el.classList.add(pulseClassNames[animation]);
+
+    const pPara = el.cloneNode(true) as HTMLDivElement;
+    pPara.classList.add('pulse-child-para');
+
+    el.classList.add('pulse-child');
+    const pCircle = el.cloneNode(true) as HTMLDivElement;
+    pCircle.classList.add('pulse-child-circle');
+
+    if (noRadius) {
+      el.classList.add('pulse-no-rounded');
+      pPara.classList.add('pulse-no-rounded');
+    }
+
+    const pHidden = el.cloneNode(true) as HTMLDivElement;
+    pHidden.classList.add('pulse-child-hidden');
+
+    const pRect = el.cloneNode(true) as HTMLDivElement;
+    pRect.classList.add('pulse-child-rect');
+
+    const pRectFull = el.cloneNode(true) as HTMLDivElement;
+    pRectFull.classList.add('pulse-child-rect-full');
+
+    return {
+      pCircle: () => pCircle.cloneNode(true) as HTMLDivElement,
+      pPara: () => pPara.cloneNode(true) as HTMLDivElement,
+      pHidden: () => pHidden.cloneNode(true) as HTMLDivElement,
+      pRect: () => pRect.cloneNode(true) as HTMLDivElement,
+      pRectFull: () => pRectFull.cloneNode(true) as HTMLDivElement,
+      pParaCont: () => pulseParaCont.cloneNode(true) as HTMLDivElement,
+    };
+  };
+  const [components, setComponents] = useState(getComps);
+
   useEffect(() => {
     const manp = () => {
-      setCalculating(true);
-
       if (isLoading) {
+        setCalculating(true);
         if (!ref.current) {
+          setCalculating(false);
+          return;
+        }
+
+        if (!components) {
+          setComponents(getComps());
+        }
+        if (!components) {
+          setCalculating(false);
           return;
         }
 
@@ -100,92 +165,43 @@ const Pulsable = ({
 
           const pc = element.querySelector('.pulse-child');
           if (!pc) {
-            const pulseEl = document.createElement('div');
-            pulseEl.style.setProperty(
-              '--color-transparent-medium',
-              bgColors?.medium || 'rgba(130, 130, 130, 0.3)'
-            );
+            var pulseEl;
+            const cList = element.classList;
 
-            pulseEl.style.setProperty(
-              '--color-transparent-light',
-              bgColors?.light || 'rgba(130, 130, 130, 0.2)'
-            );
+            if (cList.contains('pulsable-circle')) {
+              pulseEl = components.pCircle();
+            } else if (cList.contains('pulsable-hidden')) {
+              pulseEl = components.pHidden();
+            } else if (cList.contains('pulsable-para')) {
+              pulseEl = components.pParaCont();
 
-            pulseEl.classList.add('pulse-child');
-
-            if (noRadius && !pulseEl.classList.contains('pulsable-circle')) {
-              pulseEl.classList.add('pulse-no-rounded');
-            }
-
-            if (element.classList.contains('pulsable-circle')) {
-              pulseEl.classList.add(
-                pulseClassNames[animation],
-                'pulse-child-circle'
-              );
-            } else if (element.classList.contains('pulsable-hidden')) {
-              pulseEl.classList.add(
-                pulseClassNames[animation],
-                'pulse-child-hidden'
-              );
-            } else if (element.classList.contains('pulsable-para')) {
               const res = countLines(element);
-              pulseEl.classList.add(
-                'pulse-child-para-cont',
-                'pulse-no-rounded'
-              );
 
               const gap =
                 (res.height - res.font_size * res.lines) / (res.lines + 2);
 
               const gapString = `${Math.max(gap, 8)}px`;
 
-              // pulseEl.style.setProperty('gap', gapString);
-
-              // pulseEl.style.setProperty('height', `${res.height - gap * 2}px`);
               pulseEl.style.setProperty('padding-top', gapString);
               pulseEl.style.setProperty('padding-bottom', gapString);
 
-              const pulsePara = document.createElement('div');
+              const pulsePara = components.pPara();
 
               pulsePara.style.setProperty(
                 'height',
                 `${(res.font_size * 80) / 100}px`
-              );
-              pulsePara.style.setProperty(
-                '--color-transparent-medium',
-                bgColors?.medium || 'rgba(130, 130, 130, 0.3)'
-              );
-
-              pulsePara.style.setProperty(
-                '--color-transparent-light',
-                bgColors?.light || 'rgba(130, 130, 130, 0.2)'
-              );
-
-              if (noRadius) {
-                pulsePara.classList.add('pulse-no-rounded');
-              }
-
-              pulsePara.classList.add(
-                pulseClassNames[animation],
-                'pulse-child-para'
               );
 
               for (let i = 0; i < res.lines; i++) {
                 pulseEl.appendChild(pulsePara.cloneNode(true));
               }
             } else if (noPadding) {
-              pulseEl.classList.add(
-                pulseClassNames[animation],
-                'pulse-child-rect-full'
-              );
+              pulseEl = components.pRectFull();
             } else {
-              pulseEl.classList.add(
-                pulseClassNames[animation],
-                'pulse-child-rect'
-              );
+              pulseEl = components.pRect();
             }
 
-            if (element.classList.contains('pulsable-img')) {
+            if (cList.contains('pulsable-img')) {
               pulseEl.appendChild(iSvg);
             }
 
@@ -222,8 +238,6 @@ const Pulsable = ({
           .forEach((element) => {
             element.classList.remove('pulse-child-element');
           });
-
-        setCalculating(false);
       }
     };
 
