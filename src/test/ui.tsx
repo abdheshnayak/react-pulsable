@@ -7,16 +7,23 @@ const App = ({ isLoading }: { isLoading: boolean }) => {
   return (
     <>
       {/* default background */}
-      <Pulsable isLoading={isLoading}>
+      <Pulsable
+        config={{
+          animation: 'wave-reverse',
+        }}
+        isLoading={isLoading}
+      >
         <YourComponent2 />
       </Pulsable>
 
       {/* custom background */}
       <Pulsable
         isLoading={isLoading}
-        bgColors={{
-          light: 'rgba(0, 128, 0, 0.2)',
-          medium: 'rgba(0, 128, 0, 0.3)',
+        config={{
+          bgColors: {
+            light: 'rgba(0, 128, 0, 0.2)',
+            medium: 'rgba(0, 128, 0, 0.3)',
+          },
         }}
       >
         <YourComponent />
@@ -24,11 +31,13 @@ const App = ({ isLoading }: { isLoading: boolean }) => {
 
       {/* custom background with no rounded corners */}
       <Pulsable
-        noRadius
         isLoading={isLoading}
-        bgColors={{
-          light: 'rgba(0, 0, 255, 0.2)',
-          medium: 'rgba(0, 0, 255, 0.3)',
+        config={{
+          noRadius: true,
+          bgColors: {
+            light: 'rgba(0, 0, 255, 0.2)',
+            medium: 'rgba(0, 0, 255, 0.3)',
+          },
         }}
       >
         <YourComponent />
@@ -36,11 +45,13 @@ const App = ({ isLoading }: { isLoading: boolean }) => {
 
       {/* custom background with no padding in each skeleton items */}
       <Pulsable
-        noPadding
         isLoading={isLoading}
-        bgColors={{
-          light: 'tomato',
-          medium: 'orange',
+        config={{
+          noPadding: true,
+          bgColors: {
+            light: 'tomato',
+            medium: 'orange',
+          },
         }}
       >
         <YourComponent />
@@ -64,7 +75,13 @@ const TestUI = () => {
         </div>
       </button>
 
-      <Pulsable animation="wave-reverse" noRadius isLoading={isLoading}>
+      <Pulsable
+        config={{
+          animation: 'wave-reverse',
+          noRadius: true,
+        }}
+        isLoading={isLoading}
+      >
         <div
           style={{
             display: 'flex',

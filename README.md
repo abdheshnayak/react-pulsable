@@ -6,7 +6,7 @@ This is a simple react component that can be used to wrap other components and a
 
 ![Demo Image](./screenshot.png)
 
-### Example 1
+### how to use it?
 
 ```jsx
 const App = ({ isLoading }: { isLoading: boolean }) => {
@@ -19,11 +19,12 @@ const App = ({ isLoading }: { isLoading: boolean }) => {
 
       {/* custom background */}
       <Pulsable
-        animation="wave-reverse"
         isLoading={isLoading}
-        bgColors={{
-          light: 'rgba(0, 128, 0, 0.2)',
-          medium: 'rgba(0, 128, 0, 0.3)',
+        config={{
+          bgColors: {
+            light: 'rgba(0, 128, 0, 0.2)',
+            medium: 'rgba(0, 128, 0, 0.3)',
+          },
         }}
       >
         <YourComponent />
@@ -31,11 +32,13 @@ const App = ({ isLoading }: { isLoading: boolean }) => {
 
       {/* custom background with no rounded corners */}
       <Pulsable
-        noRadius
         isLoading={isLoading}
-        bgColors={{
-          light: 'rgba(0, 0, 255, 0.2)',
-          medium: 'rgba(0, 0, 255, 0.3)',
+        config={{
+          noRadius: true,
+          bgColors: {
+            light: 'rgba(0, 0, 255, 0.2)',
+            medium: 'rgba(0, 0, 255, 0.3)',
+          },
         }}
       >
         <YourComponent />
@@ -43,11 +46,13 @@ const App = ({ isLoading }: { isLoading: boolean }) => {
 
       {/* custom background with no padding in each skeleton items */}
       <Pulsable
-        noPadding
         isLoading={isLoading}
-        bgColors={{
-          light: 'tomato',
-          medium: 'orange',
+        config={{
+          noPadding: true,
+          bgColors: {
+            light: 'tomato',
+            medium: 'orange',
+          },
         }}
       >
         <YourComponent />
@@ -57,7 +62,7 @@ const App = ({ isLoading }: { isLoading: boolean }) => {
 };
 ```
 
-### Component Example
+### what you have to do in your component?
 
 ```jsx
 const YourComponent = () => {
@@ -89,13 +94,15 @@ const YourComponent = () => {
 
 The component takes following props:
 - `isLoading`: a boolean that indicates whether the component should be pulsing or not.
-- `bgColors`: an object that contains the background colors for the pulsing effect. It has two properties:
-  - `light`: the light color of the background.
-  - `medium`: the medium color of the background.
-- `noRadius`: a boolean that indicates whether the pulsing effect should have rounded corners or not. By default it has rounded corners.
-- `noPadding`: a boolean that indicates whether the pulsing effect should have padding in each skeleton items or not. By default it has padding.
+- `config`: an object that contains the configuration for the pulsing effect. It has following properties:
+  - `bgColors`: an object that contains the background colors for the pulsing effect. It has two properties:
+    - `light`: the light color of the background.
+    - `medium`: the medium color of the background.
+  - `noRadius`: a boolean that indicates whether the pulsing effect should have rounded corners or not. By default it has rounded corners.
+  - `noPadding`: a boolean that indicates whether the pulsing effect should have padding in each skeleton items or not. By default it has padding.
+  - `animation`: you can pass animation type as a string. default is `wave` and other options are `wave-reverse`, `pulse`, `none
+
 - `className`: as Pulsable component is a wrapper component, you can pass className or alomost all attributes of div element.[means you can treat it as a div, and use accordingly]
-- `animation`: you can pass animation type as a string. default is `wave` and other options are `wave-reverse`, `pulse`, `none`.
 
 > check [example](https://codesandbox.io/s/k7fdzw?file=/src/App.js) for more.
 
