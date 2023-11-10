@@ -123,6 +123,7 @@ The component takes following props:
 - if you want to hide some components while loading add class name `pulsable-hidden`
 - if you want to add image icon in skeleton add class name `pulsable-img`
 - for the paragraph use classname `pulsable-para`
+- while applying base config to all elements, you may need some exceptions. for that you can use `pulsable-no-radius`, `pulsable-no-padding`, `pulsable-radius` and `pulsable-padding`. by using these classes you can override some specific elements.
 
 - As Shown in example, for better performance you can use `flex` and  `align-items: flex-start` in parentNode to avoid the pulsing effect from stretching the component. you can also add these styles conditionally wihile loading, if it's affecting your design.
 

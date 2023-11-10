@@ -9,8 +9,8 @@ dependencies:
     specifier: ^2.3.2
     version: 2.3.2
   pulsable:
-    specifier: ^0.0.15
-    version: 0.0.15
+    specifier: ^0.0.16
+    version: 0.0.16
   react:
     specifier: ^18.2.0 || ^17.0.0 || ^16.0.0
     version: 18.2.0
@@ -8908,8 +8908,8 @@ packages:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}
     dev: true
 
-  /pulsable@0.0.15:
-    resolution: {integrity: sha512-SXde9qCxeaO5+rX/8pGCUZ32Gu9UO01lEUor5HElv+g706QhsZS+MeUFGz7K8StkJqXfCRtogdOiQBrQtqCoBA==}
+  /pulsable@0.0.16:
+    resolution: {integrity: sha512-lm44mwmPJUps6Av6ye2S/e7RTrlmblbY0ZfFfsffi0gIwDIceyf2hCrOCNGqipHYK/KRhXqL2uNoXRkJxlGmJw==}
     dev: false
 
   /punycode@2.3.0:
