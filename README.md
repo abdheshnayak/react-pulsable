@@ -6,6 +6,14 @@ This is a simple react component that can be used to wrap other components and a
 
 ![Demo Image](./screenshot.png)
 
+### Importing
+```jsx
+import Pulsable from 'react-pulsable';
+import 'react-pulsable/index.css';
+```
+
+
+
 ### how to use it?
 
 ```jsx
@@ -118,3 +126,8 @@ The component takes following props:
 
 - As Shown in example, for better performance you can use `flex` and  `align-items: flex-start` in parentNode to avoid the pulsing effect from stretching the component. you can also add these styles conditionally wihile loading, if it's affecting your design.
 
+
+
+
+### Using CDN
+for cdn you can use another package [pulsable](https://www.npmjs.com/package/pulsable)
