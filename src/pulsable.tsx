@@ -28,7 +28,6 @@ const Pulsable = ({
 
   useEffect(() => {
     if (!ref.current) return;
-
     setPulsing({
       rootElement: ref.current,
       config: {
@@ -42,7 +41,11 @@ const Pulsable = ({
   }, [isLoading, ref.current]);
 
   return (
-    <div ref={ref} className={className} {...props}>
+    <div
+      ref={ref}
+      className={`${className} pulsable-cont pulsable-base`}
+      {...props}
+    >
       {children}
     </div>
   );
