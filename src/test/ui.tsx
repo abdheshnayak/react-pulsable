@@ -62,6 +62,16 @@ const App = ({ isLoading }: { isLoading: boolean }) => {
 
 const TestUI = () => {
   const [isLoading, setIsLoading] = useState(true);
+  var count = 0;
+
+  const k = () =>
+    setTimeout(() => {
+      count++;
+      setIsLoading((s) => !s);
+      if (count < 20) k();
+    }, 1);
+
+  k();
 
   return (
     <div className="main">
