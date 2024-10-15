@@ -2,7 +2,7 @@
   "name": "react-pulsable",
   "author": "Abdhesh Nayak",
   "license": "MIT",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "This is a simple and customizable react component library to add a pulsing/skeleton loading effect to your existing component.",
   "private": false,
   "types": "./dist/@types/pulsable.d.ts",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OpenSource-HQ/react-pulsable.git"
+    "url": "git+https://github.com/abdheshnayak/react-pulsable.git"
   },
   "keywords": [
     "react",
