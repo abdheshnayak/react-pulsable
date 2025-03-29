@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useLayoutEffect, useRef } from 'react';
 import setPulsing, { type Props } from 'pulsable';
 import 'pulsable/index.css';
 
@@ -9,20 +9,6 @@ export interface IPulsable extends Props {
   config?: Props;
   [key: string]: any;
 }
-
-type IuseDebounce = (action: () => any, delay: number, dep: any[]) => void;
-
-const useDebounce: IuseDebounce = (action, delay, dep = []) => {
-  const timerRef = useRef<number | undefined>();
-  useEffect(() => {
-    timerRef.current = setTimeout(() => {
-      action();
-    }, delay);
-    return () => {
-      clearTimeout(timerRef.current);
-    };
-  }, [delay, ...dep]);
-};
 
 const Pulsable = ({
   children,
@@ -40,26 +26,19 @@ const Pulsable = ({
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const [isFirstTime, setIsFirstTime] = useState(true);
-
-  useDebounce(
-    () => {
-      if (!ref.current) return;
-      setIsFirstTime(false);
-      setPulsing({
-        rootElement: ref.current,
-        config: {
-          animation,
-          bgColors,
-          noRadius,
-          noPadding,
-        },
-        loading: isLoading,
-      });
-    },
-    isFirstTime ? 0 : 50,
-    [isLoading, ref.current]
-  );
+  useLayoutEffect(() => {
+    if (!ref.current) return;
+    setPulsing({
+      rootElement: ref.current,
+      config: {
+        animation,
+        bgColors,
+        noRadius,
+        noPadding,
+      },
+      loading: isLoading,
+    });
+  }, [isLoading, ref.current]);
 
   return (
     <div

@@ -62,16 +62,6 @@ const App = ({ isLoading }: { isLoading: boolean }) => {
 
 const TestUI = () => {
   const [isLoading, setIsLoading] = useState(true);
-  var count = 0;
-
-  const k = () =>
-    setTimeout(() => {
-      count++;
-      setIsLoading((s) => !s);
-      if (count < 20) k();
-    }, 1);
-
-  k();
 
   return (
     <div className="main">
@@ -103,6 +93,8 @@ const TestUI = () => {
             style={{
               width: '200px',
               height: '200px',
+              minWidth: '200px',
+              minHeight: '200px',
             }}
             src="/logo.png"
             alt="logo"
